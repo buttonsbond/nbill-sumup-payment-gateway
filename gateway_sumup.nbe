@@ -1,0 +1,46 @@
+#nbill_extension_installer_1.0
+
+# The following directive tells the installer whether or not to convert the files in this extension to UTF-8.
+# If your files are encoded as ISO-8559-1 (this is usually the default for text editors, so they probably are),
+# some CMSs (eg. Joomla 1.5, Mambo 4.6) will require them to be converted to UTF-8. Other CMSs may prefer them 
+# to be kept as ISO-8559-1, or the user might be able to choose. If the files are NOT encoded using ISO-8559-1, 
+# you must set this option to C (Don't Convert), as the conversion process will not work with any other encoding.
+# In most cases though, it is necessary to set this option to A.
+# 
+# Valid values for this directive are: 
+# A = Convert if required by CMS
+# B = Convert always
+# C = Don't Convert
+Convert_ISO-8859-1_to_UTF-8=A
+
+nbill_version=2.0.0
+nbill_sp=0
+type=gateway
+name=sumup
+title=SumUp Credit and Debit Card Payment Gateway
+author=All Tech Plus Rojales
+date=March 2021
+copyright=(C) 2021 All Tech Plus Rojales. All rights reserved.
+license=See file comments
+author_email=support@all-tech-plus.com
+author_url=www.all-tech-plus.com
+version=1.0.0
+description=NBILL_SUMUP_DESC
+file=sumup/sumup.php
+admin_file=admin.sumup/sumup.php
+admin_file=admin.sumup/sumup.manifest.php
+admin_file=admin.sumup/sumup.en-GB.php
+gateway_parameter=auth_url;value=https:\//api.sumup.com/authorize;label=NBILL_SUMUP_AUTHURL;help=NBILL_SUMUP_AUTHURL_HELP;required=1;editable=1
+gateway_parameter=token_url;value=https:\//api.sump.com/token;label=NBILL_SUMUP_TOKENURL;help=NBILL_SUMUP_TOKENURL_HELP;required=1;editable=1
+gateway_parameter=checkout_url;value=https:\//api.sumup.com/v0\.1/checkouts;label=NBILL_SUMUP_CHECKOUTURL;help=NBILL_SUMUP_CHECKOUTURL_HELP;required=1;editable=1
+gateway_parameter=client_id;value=;label=NBILL_SUMUP_CLIENTID;help=NBILL_SUMUP_CLIENTID_HELP;required=1;editable=1
+gateway_parameter=client_secret;value=;label=NBILL_SUMUP_CLIENTSECRET;help=NBILL_SUMUP_CLIENTSECRET_HELP;required=1;editable=1
+gateway_parameter=client_code;value=;label=NBILL_SUMUP_CLIENTCODE;help=NBILL_SUMUP_CLIENTCODE_HELP;required=1;editable=1
+gateway_parameter=pay_to_email;value=;label=NBILL_SUMUP_PAYTOEMAIL;help=NBILL_SUMUP_PAYTOEMAIL_HELP;required=1;editable=1
+gateway_parameter=default_locale;value=en-GB;label=NBILL_SUMUP_DEFAULTLOCALE;help=NBILL_SUMUP_DEFAULTLOCALE_HELP;required=0;editable=1
+gateway_parameter=default_currency;value=EUR;label=NBILL_SUMUP_DEFAULTCURRENCY;help=NBILL_SUMUP_DEFAULTCURRENCY_HELP;required=0;editable=1
+gateway_parameter=testing;value=true;label=NBILL_SUMUP_TESTMODE;help=NBILL_SUMUP_TESTMODE_HELP;required=1;editable=1
+gateway_parameter=redirect_url;value=;label=NBILL_SUMUP_REDIRECTURL;help=NBILL_SUMUP_REDIRECTURL_HELP;required=1;editable=1
+gateway_parameter=return_url;value=;label=NBILL_SUMUP_RETURNURL;help=NBILL_SUMUP_RETURNURL_HELP;required=1;editable=1
+gateway_parameter=thankyou_url;value=;label=NBILL_SUMUP_THANKYOUURL;help=NBILL_SUMUP_THANKYOUURL_HELP;required=0;editable=1
+gateway_parameter=problem_url;value=;label=NBILL_SUMUP_PROBLEMURL;help=NBILL_SUMUP_PROBLEMURL_HELP;required=0;editable=1
