@@ -117,7 +117,8 @@ function sumup_query($url, $params, $delim, $postorget, $at) {
               
               curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
               curl_setopt($curl, CURLOPT_TIMEOUT, 200);
-              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 1);
+              // ssl_verifyhost was set to 1 but seemingly deprecated so now 2 stops a php warning
+              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
               curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
     
               // Run cURL and check for errors
