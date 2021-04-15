@@ -6,7 +6,18 @@ I have been a long time user of the excellent nBill billing software for Joomla.
 I downloaded the documentation using waybackarchive website so that I could develop this payment gateway.
 I am sure there are still lots of people using nBill, and so I hope they might find this payment gateway useful.
 
-Zip the files from the repository up, and then use nBill's extension installer to install.
+** Pre-installation procedure **
+
+If you download the latest release ZIP file from this github note that it will not install using the nBill extensions installer, you must first of all extract all the files, then go into the resulting folder, select all the files within and compress to a new ZIP file - it is this ZIP file you must use with the extensions installer.
+In case you had a failed install you may need to cleanup the folders the extensions installer may have created.
+
+Use nBill's extension installer to install the zip file you created.
+
+** Upgrade procedure **
+
+As pre-installation procedure. It is not necessary to uninstall the older version, nBill will simply upgrade the plugin.
+
+====
 
 You can configurate the gateway from Website/Payment gateways menu from the nBill backend. You're going to need some information from your SumUp account!
 
