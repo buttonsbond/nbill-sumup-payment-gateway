@@ -170,7 +170,8 @@ function sumup_query($url, $params, $delim, $postorget, $at) {
               
               curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
               curl_setopt($curl, CURLOPT_TIMEOUT, 200);
-              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 1);
+              // ssl_verifyhost was set to 1 but seemingly deprecated so now 2 stops a php warning
+              curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
               curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
     
               // Run cURL and check for errors
@@ -268,9 +269,9 @@ foreach ($orders as &$order)
         } else {
             $test="";
         }
-        // new addition to prevent displaying the form if there is no checkout tokenid - this could be because the 'payments' scope has not been enabled
+         // new addition to prevent displaying the form if there is no checkout tokenid - this could be because the 'payments' scope has not been enabled
         
-        if ($idtoken != "") {
+        if ($idtoken != "") {      
         $form  = '';
         $form .= $test;
         $form .= "<p class='alert alert-danger'>" . $data['itemname'] . "</p>";
@@ -305,5 +306,4 @@ echo $form;
 	if ($testing == true) { echo "<p class='alert alert-warning'>Please double check that you have enabled the <i>payments</i> scope with SumUp"; }
 		
 	}
-
 $abort = true; //Don't redirect to success page yet!
