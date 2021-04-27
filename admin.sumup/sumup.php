@@ -78,7 +78,7 @@ function get_sumup_token($fields) {
         $authresponse=sumup_query($authurl, $tokenpayload, "=", "POST","");
         // do we have access_token?
         $dresponse=json_decode($authresponse);
-/*               echo "<pre>"; print_r($dresponse); echo "</pre>"; */
+  /*             echo "<pre>"; print_r($dresponse); echo "</pre>";  */
         $accesstoken=$dresponse->access_token; // this worked to here    
     return $accesstoken;
 }
@@ -180,10 +180,10 @@ function sumup_query($url, $params, $delim, $postorget, $at) {
               if (curl_errno($curl)) { $result = Array('success' => 'false', 'result' => curl_errno($curl).' - '.curl_error($curl)); }
               curl_close($curl);
  
-        //  echo var_dump($headr) . " those were the headers<br/><br/>";
-        //  echo   var_dump($paramfields) . " those were the paramfields<br/><br/>";
-       //   echo var_dump($jresult) . " and that was the result</br></br>";
-       //   echo var_dump($result) . " this is the raw result";
+ //         echo var_dump($headr) . " those were the headers<br/><br/>";
+ //        echo   var_dump($paramfields) . " those were the paramfields<br/><br/>";
+//          echo var_dump($jresult) . " and that was the result</br></br>";
+ //         echo var_dump($result) . " this is the raw result";
           return $result;
      }
 
@@ -254,24 +254,30 @@ foreach ($orders as &$order)
         // change from redirect so both are notify 
         //$redirecturl=$this->config['redirect_url'] . "&currency=" . $data['currency'] . "&amount=" . $data[totaltopay] . "&pay_to_email=" . $payto;
        // $returnurl=$this->config['notify_url'] . "&currency=" . $data['currency'] . "&amount=" . $data[totaltopay] . "&pay_to_email=" . $payto;;
+       $err="";
+        if ($accesstoken != "") {
+        	$mycheckout=Array('checkout_reference'=>$myuniqueid,'amount'=>$data['totaltopay'],'currency'=>$data['currency'],'pay_to_email'=>$payto,'description'=>$data['itemname'], 'merchant_code'=>$mcode, 'redirect_url'=>$redirecturl,'return-url'=>$returnurl);
         
-        $mycheckout=Array('checkout_reference'=>$myuniqueid,'amount'=>$data['totaltopay'],'currency'=>$data['currency'],'pay_to_email'=>$payto,'description'=>$data['itemname'], 'merchant_code'=>$mcode, 'redirect_url'=>$redirecturl,'return-url'=>$returnurl);
+        	$sumupresult=sumup_query($checkout_url,$mycheckout,":","POST",$accesstoken);
         
-        $sumupresult=sumup_query($checkout_url,$mycheckout,":","POST",$accesstoken);
+        	// do we now have an id of the checkout resource?
         
-        // do we now have an id of the checkout resource?
-        
-        $idt=json_decode($sumupresult);
-        $idtoken=$idt->id;
+        	$idt=json_decode($sumupresult);
+        	$idtoken=$idt->id;
+        } else {
+        	// we have an empty access token so there was a problem	
+        	$err.="<p class='alert alert-danger'>We were not able to gain an access token with SumUp. Please check your gateway configuration for correct URLs. You could also double check that your currency code matches the expected currency to be processed in your merchant account.</p>";
+        	$idtoken="";
+        }
         
         if ($testing == true) {
-            $test="<h1>You are in test mode - providing you are using test credentials in the payment module settings your card will not be charged.</h1>";
+            $test.="<h1>You are in test mode - providing you are using test credentials in the payment module settings your card will not be charged.</h1>";
         } else {
             $test="";
         }
          // new addition to prevent displaying the form if there is no checkout tokenid - this could be because the 'payments' scope has not been enabled
         
-        if ($idtoken != "") {      
+       if ($idtoken != "") {      
         $form  = '';
         $form .= $test;
         $form .= "<p class='alert alert-danger'>" . $data['itemname'] . "</p>";
@@ -300,10 +306,11 @@ foreach ($orders as &$order)
 // end of my boxbilling bits MVB end
 
 echo $form;
+
 	} else {
 		
 	echo "<p class='alert alert-danger'>At the present time it is not possible to process your payment using SumUp. Please contact the site owner.</p>";
-	if ($testing == true) { echo "<p class='alert alert-warning'>Please double check that you have enabled the <i>payments</i> scope with SumUp"; }
+	if ($testing == true) { $err.="<p class='alert alert-warning'>Please double check that you have enabled the <i>payments</i> scope with SumUp"; echo $err; }
 		
 	}
 $abort = true; //Don't redirect to success page yet!
