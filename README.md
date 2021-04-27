@@ -32,4 +32,6 @@ If you find the plugin useful, please consider buying me a beer, you can donate 
 
 https://www.paypal.com/donate?hosted_button_id=EPJLLK8V84GFC
 
+* Thankyou Wally Howe of Sheen Lawn Tennis & Squash Club in the UK for your generous donation. *
+
 If you haven't signed up for SumUp yet, use my referral link and we both get rewarded (at the time of writing, 15 euros each, so that gives you money off your terminal device, well worth having) - http://r.sumup.com/referrals/quskP
